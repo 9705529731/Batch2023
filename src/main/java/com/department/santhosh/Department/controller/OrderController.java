@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.department.santhosh.Department.entity.OrderEntity;
-import com.department.santhosh.Department.files.StoreData;
 import com.department.santhosh.Department.service.OrderService;
 
 @RestController
@@ -21,14 +20,14 @@ public class OrderController {
 	private OrderService service;
 	
 	@PostMapping("/order")//8080
-	public OrderEntity Save(@RequestBody OrderEntity req) {
-		return service.saveOrderEntity(req);
+	public OrderEntity Save(@RequestBody OrderEntity request) {
+		return service.saveOrderEntity(request);
 		
 	}
 	
 	@GetMapping("/order")//8080
 	public List<OrderEntity> collectionlist(){
-		return service.FetchOrderEntity();
+		return service.fetchOrderEntity();
 		
 	}
 	
@@ -48,6 +47,16 @@ public class OrderController {
 		return "data successfuly deleted";
 		
 	}
+	@GetMapping("/order/report")
+	public String writetofile() {
+		
+		
+		service.getOrderIntoFile();
+		return "data transferd into file";
+		
+	}
+
+
 	
 }
 /*

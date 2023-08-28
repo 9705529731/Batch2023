@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity 
 @Table(name = "OrderTable")
 public class OrderEntity {
     @Id
@@ -23,10 +23,12 @@ public class OrderEntity {
         this.phNo = phNo;
         this.address = address;
     }
+    
 
     public OrderEntity() {
 
     }
+    
 
     public int getId() {
         return id;
@@ -47,6 +49,9 @@ public class OrderEntity {
     public String getDetails() {
         return details;
     }
+    
+   
+    
 
     public void setDetails(String details) {
         this.details = details;
@@ -66,5 +71,10 @@ public class OrderEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    @Override
+    public String toString() {
+    	return id + " " + address + " " + details + " " + name + " " + phNo;
+                
     }
 }
