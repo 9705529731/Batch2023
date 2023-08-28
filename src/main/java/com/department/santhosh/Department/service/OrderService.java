@@ -1,18 +1,26 @@
 package com.department.santhosh.Department.service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.department.santhosh.Department.entity.OrderEntity;
-import com.department.santhosh.Department.files.StoreData;
 import com.department.santhosh.Department.repository.OrderRepository;
 @Service
+
+
 public class OrderService implements OrderServiceProj{
 
+	 @Value("${output.file.path}")
+	    private String outputFilePath;
+	
 	@Autowired
 	public OrderRepository repoistory;
 	@Override
@@ -23,7 +31,7 @@ public class OrderService implements OrderServiceProj{
 	}
 
 	@Override
-	public List<OrderEntity> FetchOrderEntity() {
+	public List<OrderEntity> fetchOrderEntity() {
 		return (List<OrderEntity>)repoistory.findAll();
 	}
 
@@ -51,6 +59,7 @@ public class OrderService implements OrderServiceProj{
 		return repoistory.save(DbStore);
 	}
 
+	
 	@Override
 	public void DeleteOrderEntity(Integer orderId) {
 		repoistory.deleteById(orderId);
@@ -65,8 +74,34 @@ public class OrderService implements OrderServiceProj{
 		else
 			throw new Exception("record not found with id "+orderId);
 	}
+
+	@Override
+	public List<OrderEntity> getOrderIntoFile() {
+		
+		
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath+"/proj8.txt"))) {
+	        List<OrderEntity> store = repoistory.findAll();
+	        
+	        writer.write("id address details name phNo");
+	        writer.newLine();
+	        for (OrderEntity order : store) {
+	            writer.write(order.toString());
+	            writer.newLine();
+	        }
+	        writer.flush();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+		
+	}
+
 	
 	
 
+	}
+
 	
-}
+	
+
+

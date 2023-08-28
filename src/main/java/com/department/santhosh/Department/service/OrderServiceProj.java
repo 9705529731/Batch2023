@@ -7,7 +7,7 @@ import com.department.santhosh.Department.entity.OrderEntity;
 public interface OrderServiceProj {
 	OrderEntity saveOrderEntity(OrderEntity order);
     
-    List< OrderEntity> FetchOrderEntity();
+    List< OrderEntity> fetchOrderEntity();
     
     OrderEntity UpdateOrderEntity(OrderEntity order,Integer orderId);
     
@@ -15,4 +15,7 @@ public interface OrderServiceProj {
     
 
     OrderEntity getOrderEntity(Integer orderId ) throws Exception;
+    
+    List<OrderEntity> getOrderIntoFile();
+   
 }
