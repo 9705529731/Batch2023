@@ -23,6 +23,7 @@ public class DepartController {
 	@PostMapping("/post")
 	public DeptEntity saveDeptEntity(@RequestBody DeptEntity dept ) {
 		return deptServicei.saveDeptEntity(dept);
+		//kishor done
 	}
 	@GetMapping("/get")
 	 public List<DeptEntity> fetchDepartmentList()
